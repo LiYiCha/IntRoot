@@ -495,12 +495,12 @@ class _UpdateDialogState extends State<UpdateDialog>
     final uri = Uri.parse(url);
     final path = uri.path.toLowerCase();
 
-    // 检查文件扩展名
+    // 只检查文件扩展名，不检查路径中的 download 关键词
+    // 这样可以避免将下载页面（如 /pages/download/index.html）误判为直链
     return path.endsWith('.apk') ||
         path.endsWith('.ipa') ||
         path.endsWith('.zip') ||
-        path.endsWith('.dmg') ||
-        path.contains('download');
+        path.endsWith('.dmg');
   }
 
   // 下载更新文件
